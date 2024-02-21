@@ -11,7 +11,6 @@
         <label>●</label>
       </div>
     </div>
-
     <!-- Form -->
     <div class="container mt-5 d-flex justify-content-center align-items-center" v-if="!loading">
       <form @submit.prevent="handleSubmit" class="w-100">
@@ -25,8 +24,11 @@
 
     <!-- Response -->
     <div class="container mt-3" v-if="responseData.message && !loading">
-      <div>
-        tu es a {{ responseData.message }} % de similarité
+      <div v-if="responseData.congratulations">
+        Félicitations, tu as atteint 100% de similarité !
+      </div>
+      <div v-else>
+        Tu es à {{ responseData.message }} % de similarité
       </div>
     </div>
 
@@ -74,6 +76,13 @@ export default {
     },
     handleResponse(data) {
       this.responseData = { message: data };
+      if (data === 100) {
+        console.log(data)
+        this.responseData.congratulations = true;
+      } else {
+
+        this.responseData.congratulations = false;
+      }
     },
     addToHistorique(item) {
 
