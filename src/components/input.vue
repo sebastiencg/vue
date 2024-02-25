@@ -97,6 +97,7 @@ export default {
       this.historique = historique;
     }
   },
+  
   created() {
     this.historique = JSON.parse(localStorage.getItem("historique")) || [];
   }
